@@ -6,7 +6,7 @@
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 09:20:01 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/04/19 09:50:09 by sgoldenb         ###   ########.fr       */
+/*   Updated: 2024/04/19 12:55:31 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,9 @@ typedef int			t_bool;
 void	ft_intlen(long int n, size_t *container);
 int		ft_atoi(const char *nptr);
 int		ft_isdigit(int c);
+size_t	ft_strlen(const char *str);
+void	ft_arrfree(void **array);
+int		ft_arrlen(void **array);
 
 //PRINTF
 # define SPEC "csdiupxX%"
