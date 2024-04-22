@@ -6,7 +6,7 @@
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 20:38:06 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/04/19 17:44:28 by sgoldenb         ###   ########.fr       */
+/*   Updated: 2024/04/22 13:04:30 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@
 # define EATING 10
 # define THINKING 11
 # define SLEEPING 12
+# define DEAD 13
+
+# define R_FORK 20
+# define L_FORK 21
 
 typedef struct s_start_values
 {
@@ -42,20 +46,21 @@ typedef struct s_fork
 	int				state;
 }					t_fork;
 
-typedef struct s_philosopher
-{
-	pthread_t	*thread;
-	int			state;
-	t_args		*sval_link;
-}				t_thinker;
-
-
 typedef struct s_philo
 {
 	t_args		*start_args;
 	t_thinker	**philos;
 	t_fork		**forks;
 }				t_philo;
+
+typedef struct s_philosopher
+{
+	pthread_t	*thread;
+	int			id;
+	int			state;
+	t_args		*sval_link;
+	t_philo		*table;
+}				t_thinker;
 
 int		destroy_mutex_forks(t_fork **list);
 int		destroy_pthread_philos(t_thinker **list);
