@@ -6,7 +6,7 @@
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 13:29:20 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/04/19 17:44:30 by sgoldenb         ###   ########.fr       */
+/*   Updated: 2024/04/22 10:53:15 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	destroy_mutex_forks(t_fork **list)
 	listlen = ft_arrlen((void **)list);
 	while (--listlen > -1)
 	{
+		if (pthread_mutex_lock(list[listlen]->lock))
 		if (pthread_mutex_destroy(list[listlen]->lock) != 0)
 			return (error_message(errno, "destroy_forks"));
 		free(list[listlen]->lock);
