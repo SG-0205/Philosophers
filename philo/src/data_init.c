@@ -6,7 +6,7 @@
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 13:31:40 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/04/19 17:41:11 by sgoldenb         ###   ########.fr       */
+/*   Updated: 2024/04/22 16:05:46 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ t_thinker	**create_philos(t_philo *data)
 			(ft_arrfree((void **)philos), free(philos));
 			return (NULL);
 		}
+		philos[i]->id = i;
 	}
 	return (philos);
 }

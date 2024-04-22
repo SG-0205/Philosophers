@@ -6,7 +6,7 @@
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:59:50 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/04/22 13:36:24 by sgoldenb         ###   ########.fr       */
+/*   Updated: 2024/04/22 16:20:41 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ int	find_fork(t_thinker *thinker, int to_find)
 
 t_bool	try_eat(t_thinker *thinker, int rf_id, int lf_id)
 {
-	if (pthread_mutex_lock(thinker->table->forks[lf_id]) == 0
-		&& pthread_mutex_lock(thinker->table->forks[rf_id]) == 0)
+	if (pthread_mutex_lock(thinker->table->forks[lf_id]->lock) == 0
+		&& pthread_mutex_lock(thinker->table->forks[rf_id]->lock) == 0)
 	{
 		thinker->state = EATING;
 		usleep(thinker->sval_link->tte);
-		pthread_mutex_unlock(thinker->table->forks[rf_id]);
-		pthread_mutex_unlock(thinker->table->forks[lf_id]);
+		pthread_mutex_unlock(thinker->table->forks[rf_id]->lock);
+		pthread_mutex_unlock(thinker->table->forks[lf_id]->lock);
 		return (TRUE);
 	}
 	return (FALSE);
@@ -56,7 +56,9 @@ int	philo_routine(t_thinker *thinker)
 	{
 		if (try_eat(thinker, rf_id, lf_id) == FALSE)
 		{
-			
+			thinker->state = THINKING;
+			usleep(thinker->sval_link->tte);
 		}
 	}
+	return (0);
 }
