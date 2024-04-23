@@ -6,7 +6,7 @@
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:07:05 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/04/19 15:40:06 by sgoldenb         ###   ########.fr       */
+/*   Updated: 2024/04/23 11:36:14 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ int	ft_arrlen(void **array)
 // {
 // 	char *array[] = {"TRUE"/*, "TRUE", "FALSE"*/, NULL};
 
-// 	ft_printf("3 = %d\n", ft_arrlen((void **)array));
+// 	printf("3 = %d\n", ft_arrlen((void **)array));
 // 	return (0);
 // }

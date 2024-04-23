@@ -6,7 +6,7 @@
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 13:29:20 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/04/22 10:53:15 by sgoldenb         ###   ########.fr       */
+/*   Updated: 2024/04/23 13:44:33 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,20 @@ t_bool	setup_fork(t_fork *fork)
 {
 	if (!fork)
 		return (FALSE);
-	fork->state = INACTIVE;
+	fork->state = FREE;
 	fork->lock = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
 	if (!fork->lock || pthread_mutex_init(fork->lock, NULL) != 0)
 		return (FALSE);
 	return (TRUE);
 }
 
-t_bool	setup_thinkers(t_thinker *philo, t_args *sval_addr)
+t_bool	setup_thinkers(t_thinker *philo, t_args *sval_addr, t_philo *table)
 {
 	if (!philo)
 		return (FALSE);
 	philo->state = INACTIVE;
 	philo->sval_link = sval_addr;
+	philo->table = table;
 	philo->thread = (pthread_t *)malloc(sizeof(pthread_t));
 	if (!philo->thread)
 		return (FALSE);

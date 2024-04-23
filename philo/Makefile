@@ -6,7 +6,7 @@
 #    By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/18 20:16:10 by sgoldenb          #+#    #+#              #
-#    Updated: 2024/04/22 10:49:29 by sgoldenb         ###   ########.fr        #
+#    Updated: 2024/04/23 13:17:24 by sgoldenb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ OBJS = $(addprefix $(SRC_DIR)/, $(SRCS:.c=.o))
 all: $(NAME)
 
 test:
-	cc -Wall -Wextra -Werror src/*.c inc/utils/*.c -o philotest
+	cc -Wall -Wextra -Werror src/*.c inc/utils/*.c -g -o philotest
 
 $(NAME): norminette libft $(OBJS)
 	@echo "\n$(INFO_MESSAGE)Compilation philosophers"

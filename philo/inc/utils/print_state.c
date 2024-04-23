@@ -6,7 +6,7 @@
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 15:47:06 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/04/22 16:28:55 by sgoldenb         ###   ########.fr       */
+/*   Updated: 2024/04/23 11:46:52 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,19 @@
 
 void	print_state(t_thinker *thinker, int flag)
 {
-	struct timeval	*time;
-
-	time = (struct timeval *)malloc(sizeof(struct timeval));
-	gettimeofday(time, NULL);
 	if (flag == EATING)
-		ft_printf("[%d:%d] : N°%d is eating\n", time->tv_sec, time->tv_usec, thinker->id);
-	free(time);
+		printf(GREEN"[%ld] : N°%d is eating\n"RESET,
+			(get_time_ld() - thinker->sval_link->start_time), thinker->id);
+	if (flag == R_FORK || flag == L_FORK)
+		printf(BLUE"[%ld] : N°%d has taken a fork\n"RESET,
+			(get_time_ld() - thinker->sval_link->start_time), thinker->id);
+	if (flag == DEAD)
+		printf(RED"[%ld] : N°%d has died\n"RESET,
+			(get_time_ld() - thinker->sval_link->start_time), thinker->id);
+	if (flag == SLEEPING)
+		printf(YELLOW"[%ld] : N°%d is sleeping\n"RESET,
+			(get_time_ld() - thinker->sval_link->start_time), thinker->id);
+	if (flag == THINKING)
+		printf(CYAN"[%ld] : N°%d is thinking\n"RESET,
+			(get_time_ld() - thinker->sval_link->start_time), thinker->id);
 }

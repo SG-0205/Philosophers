@@ -6,7 +6,7 @@
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 13:31:40 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/04/22 16:05:46 by sgoldenb         ###   ########.fr       */
+/*   Updated: 2024/04/23 13:20:26 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@ t_args	*save_args(char **args, int nb_args)
 	var = (t_args *)malloc(sizeof(t_args));
 	if (!var)
 		return (NULL);
+	var->start_time = get_time_ld();
 	var->nb_philo = ft_atoi(args[1]);
-	var->ttd = ft_atoi(args[2]);
-	var->tte = ft_atoi(args[3]);
-	var->tts = ft_atoi(args[4]);
+	var->ttd = ft_atoi(args[2]) * 1000;
+	var->tte = ft_atoi(args[3]) * 1000;
+	var->tts = ft_atoi(args[4]) * 1000;
 	if (nb_args == 6)
 	{
 		var->total_meals = ft_atoi(args[5]);
@@ -80,7 +81,7 @@ t_fork	**forge_forks(t_philo *data)
 			return (NULL);
 		}
 	}
-	ft_printf("FORKSOK\n");
+	printf("FORKSOK\n");
 	return (forks);
 }
 
@@ -101,7 +102,7 @@ t_thinker	**create_philos(t_philo *data)
 	{
 		philos[i] = (t_thinker *)malloc(sizeof(t_thinker));
 		if (!philos[i]
-			|| setup_thinkers(philos[i], data->start_args) == FALSE)
+			|| setup_thinkers(philos[i], data->start_args, data) == FALSE)
 		{
 			(ft_arrfree((void **)philos), free(philos));
 			return (NULL);

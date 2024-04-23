@@ -6,7 +6,7 @@
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 20:38:06 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/04/22 16:19:31 by sgoldenb         ###   ########.fr       */
+/*   Updated: 2024/04/23 13:19:59 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "utils/philo_utils.h"
 # include <pthread.h>
+# include <stdio.h>
 # include <sys/time.h>
 
 # define ENDLESS -1
@@ -36,6 +37,7 @@ typedef struct s_philo	t_philo;
 typedef struct s_start_values
 {
 	int					nb_philo;
+	long int			start_time;
 	int					ttd;
 	int					tte;
 	int					tts;
@@ -65,9 +67,15 @@ typedef struct s_philo
 	t_fork				**forks;
 }						t_philo;
 
+int						create_threads(t_philo *data);
+void					*philo_routine(void *thinker);
+int						find_fork(t_thinker *thinker, int to_find);
+t_bool					take_forks(t_thinker *thinker, int lfid, int rfid);
+long int				get_time_ld(void);
 int						destroy_mutex_forks(t_fork **list);
 int						destroy_pthread_philos(t_thinker **list);
-t_bool					setup_thinkers(t_thinker *philo, t_args *sval_addr);
+t_bool					setup_thinkers(t_thinker *philo, t_args *sval_addr,
+							t_philo *table);
 t_args					*save_args(char **args, int nb_args);
 t_bool					setup_fork(t_fork *fork);
 t_bool					check_args(char **args, int nb_args);

@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printpointer.c                                  :+:      :+:    :+:   */
+/*   threads_start.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/20 19:01:47 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/04/19 09:51:35 by sgoldenb         ###   ########.fr       */
+/*   Created: 2024/04/23 13:03:43 by sgoldenb          #+#    #+#             */
+/*   Updated: 2024/04/23 13:29:45 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_utils.h"
+#include "../inc/philo.h"
 
-void	ft_printpointer(unsigned long long pointer, const char *base, int *len)
+int	create_threads(t_philo *data)
 {
-	if (!pointer)
-		ft_putstr_f("(nil)", len);
-	else
+	int	i;
+
+	i = -1;
+	while (++i < data->start_args->nb_philo)
 	{
-		ft_putstr_f("0x", len);
-		ft_putunsigned(pointer, base, len);
+		pthread_create(data->philos[i]->thread,
+			NULL, philo_routine, data->philos[i]);
 	}
+	i = -1;
+	while (++i < data->start_args->nb_philo)
+		pthread_join(*data->philos[i]->thread, NULL);
+	return (0);
 }

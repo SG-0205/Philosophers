@@ -6,7 +6,7 @@
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 09:20:01 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/04/22 16:04:27 by sgoldenb         ###   ########.fr       */
+/*   Updated: 2024/04/23 11:35:10 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,20 +83,5 @@ int		ft_isdigit(int c);
 size_t	ft_strlen(const char *str);
 void	ft_arrfree(void **array);
 int		ft_arrlen(void **array);
-
-//PRINTF
-# define SPEC "csdiupxX%"
-# define BASE_HEX_MIN "0123456789abcdef"
-# define BASE_HEX_MAJ "0123456789ABCDEF"
-# define BASE_TEN "0123456789"
-
-void				ft_putunsigned(unsigned long long nbr, const char *base,
-						int *len);
-void				ft_putnbr_base_f(int nbr, const char *base, int *len);
-void				ft_printpointer(unsigned long long pointer,
-						const char *base, int *len);
-void				ft_putchar_f(char c, int *len);
-void				ft_putstr_f(const char *str, int *len);
-int					ft_printf(const char *format, ...);
 
 #endif
