@@ -6,7 +6,7 @@
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 12:54:59 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/04/23 13:47:17 by sgoldenb         ###   ########.fr       */
+/*   Updated: 2024/04/24 14:51:19 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 t_bool	take_forks(t_thinker *thinker, int lfid, int rfid)
 {
-	if (thinker->table->forks[lfid]->state == TAKEN
-		|| thinker->table->forks[rfid]->state == TAKEN)
-	return (FALSE);
 	if (pthread_mutex_lock(thinker->table->forks[lfid]->lock) == 0)
 	{
+			if (thinker->table->forks[lfid]->state == TAKEN
+				|| thinker->table->forks[rfid]->state == TAKEN)
+			return (FALSE);
 		thinker->table->forks[lfid]->state = TAKEN;
 		print_state(thinker, L_FORK);
 		if (pthread_mutex_lock(thinker->table->forks[rfid]->lock) == 0)

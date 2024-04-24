@@ -6,7 +6,7 @@
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 13:31:40 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/04/23 13:20:26 by sgoldenb         ###   ########.fr       */
+/*   Updated: 2024/04/24 14:21:07 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,9 @@ t_args	*save_args(char **args, int nb_args)
 	{
 		var->total_meals = ft_atoi(args[5]);
 		var->tmeals_lock = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
-		if (!var->tmeals_lock || pthread_mutex_init(var->tmeals_lock,
-				NULL) != 0)
+		if (!var->tmeals_lock)
+			return (NULL);
+		if (pthread_mutex_init(var->tmeals_lock, NULL) != 0)
 			return (NULL);
 	}
 	else
@@ -81,7 +82,6 @@ t_fork	**forge_forks(t_philo *data)
 			return (NULL);
 		}
 	}
-	printf("FORKSOK\n");
 	return (forks);
 }
 
@@ -126,5 +126,7 @@ t_philo	*init_data(char **args, int nb_args)
 	if (!data->philos)
 		return (NULL);
 	data->forks = forge_forks(data);
+	if (!data->forks)
+		return (NULL);
 	return (data);
 }

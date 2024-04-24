@@ -6,7 +6,7 @@
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 20:44:07 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/04/23 13:34:55 by sgoldenb         ###   ########.fr       */
+/*   Updated: 2024/04/24 14:28:32 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	print_data(t_philo *data, char *location)
 	printf("\t\tLOCK = %p\n" RESET, data->start_args->tmeals_lock);
 	printf(RESET BOLD"\t<--PHILOS-->\n"RESET YELLOW);
 	for (int i = 0; data->philos[i]; i ++)
-		printf("\t\tPHILO [%d] =\t %p\tSTATE =\t%d @ %p\tDEFVALS->%p\n", data->philos[i]->id, data->philos[i], data->philos[i]->state, data->philos[i]->thread, data->philos[i]->sval_link);
+		printf("\t\tPHILO [%d] =\t %p\tSTATE =\t%d @ %p\tDEFVALS->%p\tTABLE->%p\n", data->philos[i]->id, data->philos[i], data->philos[i]->state, data->philos[i]->thread, data->philos[i]->sval_link, data->philos[i]->sval_link->tmeals_lock);
 	printf(RESET BOLD"\t<--FORKS-->\n" RESET YELLOW);
 	for (int i = 0; i < data->start_args->nb_philo; i++)
 		printf("\t\t[%d]LOCK = \t%p\tSTATE = %d\n", i + 1, data->forks[i]->lock, data->forks[i]->state);

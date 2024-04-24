@@ -6,7 +6,7 @@
 #    By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/18 20:16:10 by sgoldenb          #+#    #+#              #
-#    Updated: 2024/04/23 13:17:24 by sgoldenb         ###   ########.fr        #
+#    Updated: 2024/04/24 13:17:28 by sgoldenb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,9 @@ all: $(NAME)
 test:
 	cc -Wall -Wextra -Werror src/*.c inc/utils/*.c -g -o philotest
 
+test_t:
+	cc -Wall -Wextra -Werror -pthread src/*.c inc/utils/*.c -g -o philotest
+	
 $(NAME): norminette libft $(OBJS)
 	@echo "\n$(INFO_MESSAGE)Compilation philosophers"
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LDFLAGS) || { echo "$(ERROR_MESSAGE)Erreur de compilation philosophers"; exit $?; }
