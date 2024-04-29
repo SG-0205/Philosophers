@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_fork.c                                        :+:      :+:    :+:   */
+/*   debug_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 12:50:44 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/04/23 12:51:24 by sgoldenb         ###   ########.fr       */
+/*   Created: 2024/04/29 14:03:28 by sgoldenb          #+#    #+#             */
+/*   Updated: 2024/04/29 14:21:27 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-int	find_fork(t_thinker *thinker, int to_find)
+void	debug_data(t_env *env, char *src)
 {
-	if (to_find == R_FORK)
+	if (src)
+		printf(GREEN "//ENV @ %s\n" RESET, src);
+	else
+		printf(GREEN "//ENV\n" RESET);
+	printf(BOLD "\t--PHILOS\n" RESET);
+	for (int i = 0; i < env->nb_philo ; i ++)
 	{
-		if (thinker->id == thinker->sval_link->nb_philo - 1)
-			return (0);
-		else
-			return (thinker->id + 1);
+		printf(YELLOW "\t\t[%d] @ %p\tSTATE = %d\t THREAD @ %p\t ENV @ %p\n",
+			env->philos[i]->id, env->philos[i], env->philos[i]->state,
+			env->philos[i]->thread, env->philos[i]->env);
 	}
-	else if (to_find == L_FORK)
-	{
-		if (thinker->id == 0)
-			return (thinker->sval_link->nb_philo - 1);
-		else
-			return (thinker->id - 1);
-	}
-	return (0);
 }
