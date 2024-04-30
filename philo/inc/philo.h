@@ -54,11 +54,16 @@ typedef struct s_philosopher
 {
 	pthread_t			*thread;
 	int					id;
+	int					lf_id;
+	int					rf_id;
 	int					state;
+	long int			start;
 	t_env				*env;
 }						t_thinker;
 
 void	debug_data(t_env *env, char *src);
 t_bool	init_env(int argc, char **argv, t_env *env);
+int		rev_index(t_thinker *phi, int flag);
+int		get_fork_id(t_thinker *phi, int flag);
 
 #endif

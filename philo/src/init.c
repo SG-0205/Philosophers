@@ -40,6 +40,9 @@ static t_bool	setup_philo(t_env *env, t_thinker *philo, int id)
 {
 	philo->env = env;
 	philo->id = id;
+	philo->start = 0;
+	philo->lf_id = INACTIVE;
+	philo->rf_id = INACTIVE;
 	philo->state = INACTIVE;
 	philo->thread = (pthread_t *)malloc(sizeof(pthread_t));
 	if (!philo->thread)
