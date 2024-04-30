@@ -26,6 +26,8 @@ int	main(int argc, char **argv)
 	if (argc < 5 || argc > 6)
 		return (usage());
 	env = (t_env *)malloc(sizeof(t_env));
+	if (!env)
+		return (1);
 	if (init_env(argc, argv, env) == TRUE)
 		debug_data(env, "INIT");
 	return (0);

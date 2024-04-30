@@ -77,11 +77,13 @@
 
 typedef int			t_bool;
 
-void	ft_intlen(long int n, size_t *container);
-int		ft_atoi(const char *nptr);
-int		ft_isdigit(int c);
-size_t	ft_strlen(const char *str);
-void	ft_arrfree(void **array);
-int		ft_arrlen(void **array);
+void		ft_intlen(long int n, size_t *container);
+int			ft_atoi(const char *nptr);
+int			ft_isdigit(int c);
+size_t		ft_strlen(const char *str);
+void		ft_arrfree(void **array);
+int			ft_arrlen(void **array);
+long int	get_time_ld(void);
+
 
 #endif

@@ -21,8 +21,11 @@ void	debug_data(t_env *env, char *src)
 	printf(BOLD "\t--PHILOS\n" RESET);
 	for (int i = 0; i < env->nb_philo ; i ++)
 	{
-		printf(YELLOW "\t\t[%d] @ %p\tSTATE = %d\t THREAD @ %p\t ENV @ %p\n",
-			env->philos[i]->id, env->philos[i], env->philos[i]->state,
+		printf(YELLOW "\t\t[%d] @ %p\tSTATE = %d\t THREAD @ %p\t ENV @ %p\n"
+			RESET, env->philos[i]->id, env->philos[i], env->philos[i]->state,
 			env->philos[i]->thread, env->philos[i]->env);
 	}
+	printf(BOLD "\t--FORKS\n" RESET);
+	for (int i = 0; i < env->nb_philo ; i ++)
+		printf(YELLOW "\t\t[%d] @ %p\n" RESET, i, env->forks[i]);
 }

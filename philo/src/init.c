@@ -12,6 +12,30 @@
 
 #include "../inc/philo.h"
 
+static t_bool	create_forks(t_env *env, pthread_mutex_t **forks)
+{
+	int	nb_philos;
+
+	if (!env)
+		return (FALSE);
+	nb_philos = env->nb_philo;
+	forks = (pthread_mutex_t **)malloc(sizeof(pthread_mutex_t *)
+			* nb_philos + 1);
+	forks[nb_philos] = NULL;
+	while (--nb_philos > -1)
+	{
+		printf("i philo %d\n", nb_philos);
+		forks[nb_philos] = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+		if (!forks[nb_philos])
+		{
+			(ft_arrfree((void **)forks), free(forks));
+			return (FALSE);
+		}
+	}
+	env->forks = forks;
+	return (TRUE);
+}
+
 static t_bool	setup_philo(t_env *env, t_thinker *philo, int id)
 {
 	philo->env = env;
@@ -50,17 +74,24 @@ static t_bool	init_philos(t_env *env, t_thinker **philos)
 
 t_bool	init_env(int argc, char **argv, t_env *env)
 {
-	if (!env)
-		return (FALSE);
 	if (argc == 6)
 		env->total_meals = ft_atoi(argv[5]);
 	else
 		env->total_meals = ENDLESS;
 	env->nb_philo = ft_atoi(argv[1]);
-	env->ttd_ms = (ft_atoi(argv[2]) * 1000);
-	env->tte_ms = (ft_atoi(argv[3]) * 1000);
-	env->tts_ms = (ft_atoi(argv[4]) * 1000);
+	env->ttd_us = (ft_atoi(argv[2]) * 1000);
+	env->tte_us = (ft_atoi(argv[3]) * 1000);
+	env->tts_us = (ft_atoi(argv[4]) * 1000);
 	if (init_philos(env, env->philos) == FALSE)
+		return (FALSE);
+	if (create_forks(env, env->forks) == FALSE)
+		return (FALSE);
+	env->dead_philo = FALSE;
+	env->monitoring = (pthread_t *)malloc(sizeof(pthread_t));
+	if (!env->monitoring)
+		return (FALSE);
+	env->print_lock = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+	if (!env->print_lock || pthread_mutex_init(env->print_lock, NULL) != 0);
 		return (FALSE);
 	return (TRUE);
 }

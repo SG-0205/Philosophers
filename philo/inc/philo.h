@@ -39,14 +39,15 @@ typedef struct s_start_values
 	int					nb_philo;
 	pthread_mutex_t		**forks;
 	t_thinker			**philos;
-	long int			start_time;
-	int					ttd_ms;
-	int					tte_ms;
-	int					tts_ms;
+	long int			last_meal_t;
+	int					ttd_us;
+	int					tte_us;
+	int					tts_us;
 	pthread_t			*monitoring;
 	t_bool				dead_philo;
 	int					total_meals;
 	pthread_mutex_t		*struct_lock;
+	pthread_mutex_t		*print_lock;
 }						t_env;
 
 typedef struct s_philosopher
