@@ -24,10 +24,11 @@ void	start_threads(t_env *env)
 	int	nb_philos;
 
 	nb_philos = env->nb_philo;
-	pthread_create(env->monitoring, NULL, monitoring_routine, (void *)env);
 	env->start_time = get_time_ld();
+	pthread_create(env->monitoring, NULL, monitoring_routine, (void *)env);
 	while (--nb_philos > -1)
 	{
+		printf("%d\n", nb_philos);
 		usleep(40);
 		pthread_create(env->philos[nb_philos]->thread, NULL, routine,
 			env);

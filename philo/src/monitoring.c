@@ -27,5 +27,6 @@ void	*monitoring_routine(void *env)
 			break ;
 		pthread_mutex_unlock(env_cast->struct_lock);
 	}
+	debug_data(env_cast, "MONIT_EXIT\n");
 	return (NULL);
 }

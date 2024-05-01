@@ -61,7 +61,6 @@ void	*routine(void *phi)
 {
 	t_thinker	*phi_cast;
 
-	printf("ENV = %p\n", phi);
 	phi_cast = (t_thinker *)phi;
 	phi_cast->lf_id = get_fork_id(phi, L_FORK);
 	phi_cast->rf_id = get_fork_id(phi, R_FORK);
