@@ -6,7 +6,7 @@
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 09:20:01 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/04/23 11:35:10 by sgoldenb         ###   ########.fr       */
+/*   Updated: 2024/05/01 19:45:41 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,5 @@ size_t		ft_strlen(const char *str);
 void		ft_arrfree(void **array);
 int			ft_arrlen(void **array);
 long int	get_time_ld(void);
-
 
 #endif

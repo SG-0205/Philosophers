@@ -6,7 +6,7 @@
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 20:38:06 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/04/29 14:12:10 by sgoldenb         ###   ########.fr       */
+/*   Updated: 2024/05/01 20:20:07 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_start_values
 	pthread_mutex_t		**forks;
 	t_thinker			**philos;
 	long int			last_meal_t;
+	long int			start_time; 
 	int					ttd_us;
 	int					tte_us;
 	int					tts_us;
@@ -65,5 +66,8 @@ void	debug_data(t_env *env, char *src);
 t_bool	init_env(int argc, char **argv, t_env *env);
 int		rev_index(t_thinker *phi, int flag);
 int		get_fork_id(t_thinker *phi, int flag);
+void    *monitoring_routine(void *env);
+void	*routine(void *phi);
+void	print_state(t_thinker *phi, int flag);
 
 #endif

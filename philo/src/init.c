@@ -6,7 +6,7 @@
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 13:34:01 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/04/29 14:49:18 by sgoldenb         ###   ########.fr       */
+/*   Updated: 2024/05/01 20:15:13 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,14 @@ static t_bool	create_forks(t_env *env, pthread_mutex_t **forks)
 		return (FALSE);
 	nb_philos = env->nb_philo;
 	forks = (pthread_mutex_t **)malloc(sizeof(pthread_mutex_t *)
-			* nb_philos + 1);
+			* (nb_philos + 1));
 	forks[nb_philos] = NULL;
 	while (--nb_philos > -1)
 	{
 		printf("i philo %d\n", nb_philos);
 		forks[nb_philos] = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
-		if (!forks[nb_philos])
+		if (!forks[nb_philos]
+			|| pthread_mutex_init(forks[nb_philos], NULL) != 0)
 		{
 			(ft_arrfree((void **)forks), free(forks));
 			return (FALSE);
@@ -57,7 +58,7 @@ static t_bool	init_philos(t_env *env, t_thinker **philos)
 	if (!env)
 		return (FALSE);
 	nb_philos = env->nb_philo;
-	philos = (t_thinker **)malloc(sizeof(t_thinker *) * nb_philos + 1);
+	philos = (t_thinker **)malloc(sizeof(t_thinker *) * (nb_philos + 1));
 	if (!philos)
 		return (FALSE);
 	philos[nb_philos] = NULL;
@@ -94,7 +95,10 @@ t_bool	init_env(int argc, char **argv, t_env *env)
 	if (!env->monitoring)
 		return (FALSE);
 	env->print_lock = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
-	if (!env->print_lock || pthread_mutex_init(env->print_lock, NULL) != 0);
+	if (!env->print_lock || pthread_mutex_init(env->print_lock, NULL) != 0)
+		return (FALSE);
+	env->struct_lock = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+	if (!env->print_lock || pthread_mutex_init(env->print_lock, NULL) != 0)
 		return (FALSE);
 	return (TRUE);
 }

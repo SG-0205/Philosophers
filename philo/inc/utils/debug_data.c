@@ -6,7 +6,7 @@
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:03:28 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/04/29 14:21:27 by sgoldenb         ###   ########.fr       */
+/*   Updated: 2024/05/01 20:29:45 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 void	debug_data(t_env *env, char *src)
 {
 	if (src)
-		printf(GREEN "//ENV @ %s\n" RESET, src);
+		printf(GREEN "//ENV @ %s = %p\n" RESET, src, env);
 	else
-		printf(GREEN "//ENV\n" RESET);
+		printf(GREEN "//ENV = %p\n" RESET, env);
+	printf("STRUCT_LOCK\t%p\n", env->struct_lock);
 	printf(BOLD "\t--PHILOS\n" RESET);
 	for (int i = 0; i < env->nb_philo ; i ++)
 	{

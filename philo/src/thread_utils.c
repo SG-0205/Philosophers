@@ -6,13 +6,13 @@
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 13:49:11 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/04/30 13:49:11 by sgoldenb         ###   ########.fr       */
+/*   Updated: 2024/05/01 20:02:28 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-int		rev_index(t_thinker *phi, int flag)
+int	rev_index(t_thinker *phi, int flag)
 {
 	int	rev_index;
 
@@ -28,7 +28,7 @@ int		rev_index(t_thinker *phi, int flag)
 	return (rev_index);
 }
 
-int		get_fork_id(t_thinker *phi, int flag)
+int	get_fork_id(t_thinker *phi, int flag)
 {
 	int	fork_id;
 
