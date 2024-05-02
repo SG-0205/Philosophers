@@ -6,7 +6,7 @@
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:27:47 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/05/01 20:21:50 by sgoldenb         ###   ########.fr       */
+/*   Updated: 2024/05/02 12:28:14 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,13 @@ void	start_threads(t_env *env)
 
 	nb_philos = env->nb_philo;
 	env->start_time = get_time_ld();
-	pthread_create(env->monitoring, NULL, monitoring_routine, (void *)env);
 	while (--nb_philos > -1)
 	{
 		printf("%d\n", nb_philos);
-		usleep(40);
 		pthread_create(env->philos[nb_philos]->thread, NULL, routine,
-			env);
+			env->philos[nb_philos]);
 	}
+	pthread_create(env->monitoring, NULL, monitoring_routine, (void *)env);
 	pthread_join(*env->monitoring, NULL);
 	while (nb_philos++ < env->nb_philo)
 		pthread_cancel(*env->philos[nb_philos]->thread),
