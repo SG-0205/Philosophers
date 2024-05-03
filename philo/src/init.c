@@ -6,7 +6,7 @@
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 13:34:01 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/05/02 13:31:04 by sgoldenb         ###   ########.fr       */
+/*   Updated: 2024/05/03 12:18:18 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,12 @@ t_bool	init_env(int argc, char **argv, t_env *env)
 	env->ttd_us = (ft_atoi(argv[2]) * 1000);
 	env->tte_us = (ft_atoi(argv[3]) * 1000);
 	env->tts_us = (ft_atoi(argv[4]) * 1000);
+	env->ttt_us = env->tte_us - env->tts_us;
 	if (init_philos(env, env->philos) == FALSE)
 		return (FALSE);
 	if (create_forks(env, env->forks) == FALSE)
 		return (FALSE);
-	env->dead_philo = FALSE;
+	env->stop_b = FALSE;
 	env->monitoring = (pthread_t *)malloc(sizeof(pthread_t));
 	if (!env->monitoring)
 		return (FALSE);

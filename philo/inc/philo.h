@@ -6,7 +6,7 @@
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 20:38:06 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/05/01 20:20:07 by sgoldenb         ###   ########.fr       */
+/*   Updated: 2024/05/03 12:26:10 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,9 @@ typedef struct s_start_values
 	int					ttd_us;
 	int					tte_us;
 	int					tts_us;
+	int					ttt_us;
 	pthread_t			*monitoring;
-	t_bool				dead_philo;
+	t_bool				stop_b;
 	int					total_meals;
 	pthread_mutex_t		*struct_lock;
 	pthread_mutex_t		*print_lock;
@@ -66,7 +67,7 @@ void	debug_data(t_env *env, char *src);
 t_bool	init_env(int argc, char **argv, t_env *env);
 int		rev_index(t_thinker *phi, int flag);
 int		get_fork_id(t_thinker *phi, int flag);
-void    *monitoring_routine(void *env);
+void	*monitoring_routine(void *env);
 void	*routine(void *phi);
 void	print_state(t_thinker *phi, int flag);
 
