@@ -6,11 +6,11 @@
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:14:39 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/08/08 15:07:25 by sgoldenb         ###   ########.fr       */
+/*   Updated: 2024/08/08 19:50:20 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/philo.h"
+#include "../philo.h"
 
 int	usage_print(int errorcode)
 {
@@ -24,7 +24,11 @@ void	start_simulation(t_philo *table)
 
 	i = -1;
 	if (table->nb_philos == 1)
-		i = -1;
+	{
+		++i;
+		thread_operation(table->philos[i]->thread, CREATE, lone_philo_routine,
+			(void *)table->philos[i]);
+	}
 	while (++i < table->nb_philos)
 	{
 		thread_operation(table->philos[i]->thread, CREATE, philo_routine,
@@ -51,10 +55,9 @@ int	main(int argc, char **argv)
 	if (init_monitor(vals) == FALSE)
 	{
 		free_all(vals);
-		return(ENOMEM);
+		return (ENOMEM);
 	}
 	start_simulation(vals);
-	print_vals(vals);
 	free_all(vals);
 	return (0);
 }

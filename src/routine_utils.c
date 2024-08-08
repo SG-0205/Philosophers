@@ -6,35 +6,11 @@
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 16:36:10 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/08/07 18:24:14 by sgoldenb         ###   ########.fr       */
+/*   Updated: 2024/08/08 19:22:57 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
-
-int	*get_fork_ids(t_philo *data, int phi_id)
-{
-	int	*fork_ids;
-
-	fork_ids = (int *)malloc(sizeof(int) * 2);
-	if (!fork_ids)
-		return (NULL);
-	if (phi_id % 2 == 0)
-	{
-		fork_ids[FIRST] = phi_id;
-		fork_ids[LAST] = (phi_id + 1 % (data->nb_philos));
-	}
-	else
-	{
-		fork_ids[FIRST] = (phi_id + 1 % (data->nb_philos));
-		fork_ids[LAST] = phi_id;
-	}
-	if (fork_ids[FIRST] >= data->nb_philos)
-		fork_ids[FIRST] = 0;
-	else if (fork_ids[LAST] >= data->nb_philos)
-		fork_ids[LAST] = 0;
-	return (fork_ids);
-}
 
 int	set_value(pthread_mutex_t *mutex, int *val_ptr, int to_set)
 {

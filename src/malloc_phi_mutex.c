@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   malloc_phi_mutex.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/16 20:51:15 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/04/19 09:25:48 by sgoldenb         ###   ########.fr       */
+/*   Created: 2024/08/05 20:27:25 by sgoldenb          #+#    #+#             */
+/*   Updated: 2024/08/08 19:23:58 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <stdio.h>
-// #include <ctype.h>
-#include "philo_utils.h"
+#include "../philo.h"
 
-int	ft_isdigit(int c)
+t_bool	malloc_phi_mutexes(t_philo *table)
 {
-	if (c <= '9' && c >= '0')
-		return (2048);
-	else
-		return (0);
-}
+	int	i;
 
-// int main (int argc, char **argv)
-// {
-// 	if (argc != 2)
-// 		return (666);
-// 	printf("%d\t ft_isdigit\n", ft_isdigit(argv[1][0]));
-// 	printf("%d\t isdigit", isdigit(argv[1][0]));
-// 	return (0);
-// }
+	if (!table || !table->philos)
+		return (FALSE);
+	i = -1;
+	while (++i < table->nb_philos)
+	{
+		table->philos[i]->phi_mut
+			= (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+		if (!table->philos[i]->phi_mut
+			|| mutex_operation(table->philos[i]->phi_mut, INIT))
+			return (FALSE);
+	}
+	return (TRUE);
+}

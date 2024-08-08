@@ -6,11 +6,11 @@
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:15:23 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/08/08 15:10:17 by sgoldenb         ###   ########.fr       */
+/*   Updated: 2024/08/08 20:03:20 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/philo.h"
+#include "../philo.h"
 
 t_bool	init_monitor(t_philo *table)
 {
@@ -42,16 +42,27 @@ static t_bool	is_dead(t_thinker *philo)
 
 	if (get_value(philo->phi_mut, &philo->ate) == FULL)
 		return (FALSE);
-	// printf("%d FLAG_STOP\n", philo->table->flag_stop);
-	// printf("%ld - %ld\n", get_time(MS), get_value_l(philo->phi_mut,
-			// &philo->last_meal_t));
 	current_t = get_time(MS) - get_value_l(philo->phi_mut, &philo->last_meal_t);
-	// printf("%ld LAST_MEAL_T - GET_TIME\n", current_t);
 	if (current_t > philo->table->ttd)
 		dead = TRUE;
 	else
 		dead = FALSE;
 	return (dead);
+}
+
+static t_bool	all_full(t_philo *table)
+{
+	int	i;
+
+	i = -1;
+	while (++i < table->nb_philos)
+	{
+		if (get_value(table->philos[i]->phi_mut,
+				&table->philos[i]->ate) == HUNGRY)
+			return (FALSE);
+	}
+	set_value(table->locks[STRUCT], &table->flag_stop, TRUE);
+	return (TRUE);
 }
 
 void	*monitor_thread(void *data)
@@ -64,21 +75,19 @@ void	*monitor_thread(void *data)
 		;
 	while (!get_value(table->locks[STRUCT], &table->flag_stop))
 	{
-		// printf("MONOK\n");
 		i = -1;
 		while (++i < table->nb_philos && !get_value(table->locks[STRUCT],
-				&table->flag_stop) && get_value(table->philos[i]->phi_mut,
-				&table->philos[i]->ate) == HUNGRY)
+				&table->flag_stop))
 		{
+			ft_usleep(1000, table);
 			if (is_dead(table->philos[i]) == TRUE)
 			{
-				printf("PHI [%d] DIED BC T - LM = %ld\n", table->philos[i]->id,
-					get_time(MS) - table->philos[i]->last_meal_t);
 				set_value(table->locks[STRUCT], &table->flag_stop, TRUE);
 				print_state(table->philos[i], DEAD);
 			}
-		
-		}//CHECKALLFULL?
+			else if (all_full(table) == TRUE)
+				return (print_full(table));
+		}
 	}
 	return (NULL);
 }

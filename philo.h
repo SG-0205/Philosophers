@@ -6,14 +6,14 @@
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 20:38:06 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/08/07 20:52:36 by sgoldenb         ###   ########.fr       */
+/*   Updated: 2024/08/08 19:46:24 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# include "utils/philo_utils.h"
+# include "philo_utils.h"
 # include <pthread.h>
 # include <stdio.h>
 # include <sys/time.h>
@@ -135,4 +135,6 @@ int						update_value(pthread_mutex_t *mutex,
 long					get_value_l(pthread_mutex_t *mutex, long *to_get);
 long					set_value_l(pthread_mutex_t *mutex,
 							long *val_ptr, long to_set);
+void					*print_full(t_philo *philo);
+void					*lone_philo_routine(void *data);
 #endif

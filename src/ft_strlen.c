@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_arrlen.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/14 19:07:05 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/04/23 11:36:14 by sgoldenb         ###   ########.fr       */
+/*   Created: 2023/03/10 16:00:42 by sgoldenb          #+#    #+#             */
+/*   Updated: 2024/08/08 19:34:38 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_utils.h"
+#include "../philo_utils.h"
 
-int	ft_arrlen(void **array)
+size_t	ft_strlen(const char *str)
 {
-	int	size;
+	int	i;
 
-	size = -1;
-	if (!array)
-		return (size);
-	while (array[++size])
-		;
-	return (size);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
-
-// int	main(void)
-// {
-// 	char *array[] = {"TRUE"/*, "TRUE", "FALSE"*/, NULL};
-
-// 	printf("3 = %d\n", ft_arrlen((void **)array));
-// 	return (0);
-// }

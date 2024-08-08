@@ -6,11 +6,11 @@
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 14:26:22 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/08/05 15:26:21 by sgoldenb         ###   ########.fr       */
+/*   Updated: 2024/08/08 19:32:06 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/philo.h"
+#include "../philo.h"
 
 static t_bool	mutex_errors(int errcode, t_mutcodes mutcode)
 {

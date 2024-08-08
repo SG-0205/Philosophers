@@ -6,39 +6,35 @@
 #    By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/18 20:16:10 by sgoldenb          #+#    #+#              #
-#    Updated: 2024/08/05 15:27:31 by sgoldenb         ###   ########.fr        #
+#    Updated: 2024/08/08 20:11:58 by sgoldenb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-include inc/custom.mk
+include custom.mk
 
 MAKEFLAGS += --silent
 
-NAME = philosophers
-CC = cc
-CFLAGS = -Wall -Werror -Wextra -g
-LDFLAGS = -Lincludes/libft
+NAME = philo
+CC = gcc
+CFLAGS = -Wall -Werror -Wextra -O3
+F_FLAGS = -fsanitize=address -g
 
 SRC_DIR = src
-INC_DIR = inc
+INC_DIR = .
 
-SRCS = philosophers.c
+SRCS = philo.c init.c monitoring.c operations.c ft_atoi.c routine.c ft_arrfree.c ft_arrlen.c ft_intlen.c ft_isdigit.c ft_strlen.c malloc_phi_mutex.c print_state.c routine_utils.c sync_utils.c utils.c
 OBJS = $(addprefix $(SRC_DIR)/, $(SRCS:.c=.o))
 
 all: $(NAME)
-
-test:
-	cc -Wall -Wextra -Werror src/*.c inc/utils/*.c -g -o philotest
-
-test_lldb:
-	cc -Wall -Wextra -Werror -g src/*.c inc/utils/*.c -o philotest
-
-test_t:
-	cc -Wall -Wextra -Werror -pthread -fsanitize=address src/*.c inc/utils/*.c -g -o philotest
 	
-$(NAME): norminette libft $(OBJS)
+$(NAME): norminette $(OBJS)
 	@echo "\n$(INFO_MESSAGE)Compilation philosophers"
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LDFLAGS) || { echo "$(ERROR_MESSAGE)Erreur de compilation philosophers"; exit $?; }
+	@echo "$(SUCCESS_MESSAGE)philosophers OK\n"
+
+test_t: norminette $(OBJS)
+	@echo "\n$(INFO_MESSAGE)Compilation philosophers"
+	$(CC) $(CFLAGS) $(F_FLAGS) $(OBJS) -o $(NAME) $(LDFLAGS) || { echo "$(ERROR_MESSAGE)Erreur de compilation philosophers"; exit $?; }
 	@echo "$(SUCCESS_MESSAGE)philosophers OK\n"
 
 %.o: %.c
@@ -53,30 +49,18 @@ $(NAME): norminette libft $(OBJS)
 
 norminette:
 	norminette $(SRC_DIR)
-	norminette $(INC_DIR)/libft
-	norminette $(INC_DIR)/philosophers.h
+	norminette $(INC_DIR)/philo_utils.h
+	norminette $(INC_DIR)/philo.h
 	@echo "$(SUCCESS_MESSAGE)NORME OK\n"
-
-libft:
-	@echo "$(INFO_MESSAGE)Compilation libft"
-	make all -C includes/libft 2>/dev/null || { echo "$(ERROR_MESSAGE)Erreur de compilation LIBFT"; exit $?; }
-	@echo "$(SUCCESS_MESSAGE)LIBFT OK\n"
 
 clean:
 	@echo "$(INFO_MESSAGE)Nettoyage des objets"
-	rm -f $(OBJS) || $(ERROR_EXIT) "Erreur lors du nettoyage objet"
-	make clean -C includes/libft 2>/dev/null || { echo "$(ERROR_MESSAGE)Erreur lors du nettoyage objet"; exit $?; }
+	rm -f $(OBJS)
 	@echo "$(SUCCESS_MESSAGE)Nettoyage objets OK\n"
-
-t_clean:
-	@echo "$(INFO_MESSAGE)Nettoyage des tests"
-	rm -f philotest || $(ERROR_EXIT) "Erreur lors du nettoyage test"
-	@echo "$(SUCCESS_MESSAGE)Nettoyage tests OK\n"
 
 fclean:
 	@echo "$(INFO_MESSAGE)Nettoyage programmes & librairies"
 	rm -f $(NAME) || $(ERROR_EXIT) "Erreur lors du nettoyage programme"
-	make fclean -C includes/libft || { echo "$(ERROR_MESSAGE)Erreur lors du nettoyage des librairies"; exit $?; }
 	@echo "$(SUCCESS_MESSAGE)Nettoyage programmes & librairies OK\n"
 
 re: clean all

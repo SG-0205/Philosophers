@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   malloc_phi_mutex.c                                 :+:      :+:    :+:   */
+/*   ft_arrfree.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/05 20:27:25 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/08/05 20:51:35 by sgoldenb         ###   ########.fr       */
+/*   Created: 2024/03/21 17:15:02 by sgoldenb          #+#    #+#             */
+/*   Updated: 2024/08/08 19:34:38 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "../philo_utils.h"
 
-t_bool	malloc_phi_mutexes(t_philo *table)
+void	ft_arrfree(void **array)
 {
-	int	i;
+	int	size;
 
-	if (!table || !table->philos)
-		return (FALSE);
-	i = -1;
-	while (++i < table->nb_philos)
-	{
-		table->philos[i]->phi_mut =
-			(pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
-		if (!table->philos[i]->phi_mut
-			|| mutex_operation(table->philos[i]->phi_mut, INIT))
-			return (FALSE);
-	}
-	return (TRUE);
+	if (!array || !*array)
+		return ;
+	size = ft_arrlen(array);
+	while (-- size > -1)
+		free(array[size]);
 }

@@ -6,11 +6,11 @@
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:12:50 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/08/07 13:32:02 by sgoldenb         ###   ########.fr       */
+/*   Updated: 2024/08/08 19:32:06 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/philo.h"
+#include "../philo.h"
 
 static t_bool	arg_checks(int argc, char **argv)
 {
@@ -31,7 +31,7 @@ static pthread_mutex_t	**init_mutexes(int nb_mutexes)
 	int				i;
 
 	new = (pthread_mutex_t **)malloc(sizeof(pthread_mutex_t *) * (nb_mutexes
-			+ 1));
+				+ 1));
 	if (!new)
 		return (NULL);
 	i = -1;

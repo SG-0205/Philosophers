@@ -6,13 +6,13 @@
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 17:41:48 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/04/19 09:23:31 by sgoldenb         ###   ########.fr       */
+/*   Updated: 2024/08/08 19:34:38 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include <stdio.h>
 
-#include "philo_utils.h"
+#include "../philo_utils.h"
 
 void	ft_intlen(long int n, size_t *container)
 {
