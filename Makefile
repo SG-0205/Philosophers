@@ -6,7 +6,7 @@
 #    By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/18 20:16:10 by sgoldenb          #+#    #+#              #
-#    Updated: 2024/05/01 20:03:56 by sgoldenb         ###   ########.fr        #
+#    Updated: 2024/08/05 15:27:31 by sgoldenb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,9 @@ all: $(NAME)
 
 test:
 	cc -Wall -Wextra -Werror src/*.c inc/utils/*.c -g -o philotest
+
+test_lldb:
+	cc -Wall -Wextra -Werror -g src/*.c inc/utils/*.c -o philotest
 
 test_t:
 	cc -Wall -Wextra -Werror -pthread -fsanitize=address src/*.c inc/utils/*.c -g -o philotest
@@ -64,6 +67,11 @@ clean:
 	rm -f $(OBJS) || $(ERROR_EXIT) "Erreur lors du nettoyage objet"
 	make clean -C includes/libft 2>/dev/null || { echo "$(ERROR_MESSAGE)Erreur lors du nettoyage objet"; exit $?; }
 	@echo "$(SUCCESS_MESSAGE)Nettoyage objets OK\n"
+
+t_clean:
+	@echo "$(INFO_MESSAGE)Nettoyage des tests"
+	rm -f philotest || $(ERROR_EXIT) "Erreur lors du nettoyage test"
+	@echo "$(SUCCESS_MESSAGE)Nettoyage tests OK\n"
 
 fclean:
 	@echo "$(INFO_MESSAGE)Nettoyage programmes & librairies"

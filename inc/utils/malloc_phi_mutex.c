@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_time_ld.c                                      :+:      :+:    :+:   */
+/*   malloc_phi_mutex.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgoldenb <sgoldenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 11:22:27 by sgoldenb          #+#    #+#             */
-/*   Updated: 2024/04/23 11:27:26 by sgoldenb         ###   ########.fr       */
+/*   Created: 2024/08/05 20:27:25 by sgoldenb          #+#    #+#             */
+/*   Updated: 2024/08/05 20:51:35 by sgoldenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-long int	get_time_ld(void)
+t_bool	malloc_phi_mutexes(t_philo *table)
 {
-	long int		f_time;
-	struct timeval	b_time;
+	int	i;
 
-	f_time = 0;
-	if (gettimeofday(&b_time, NULL) < 0)
-		return (0);
-	f_time = (b_time.tv_sec * 1000) + (b_time.tv_usec / 1000);
-	return (f_time);
+	if (!table || !table->philos)
+		return (FALSE);
+	i = -1;
+	while (++i < table->nb_philos)
+	{
+		table->philos[i]->phi_mut =
+			(pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+		if (!table->philos[i]->phi_mut
+			|| mutex_operation(table->philos[i]->phi_mut, INIT))
+			return (FALSE);
+	}
+	return (TRUE);
 }
